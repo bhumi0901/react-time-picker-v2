@@ -1,0 +1,63 @@
+{
+  "name": "rc-time-picker-v2",
+  "version": "4.0.0-alpha.3",
+  "description": "React TimePicker v2",
+  "keywords": [
+    "react",
+    "react-time-picker",
+    "react-component",
+    "timepicker",
+    "time-picker",
+    "ui component",
+    "ui",
+    "component"
+  ],
+  "files": [
+    "lib",
+    "es",
+    "assets/*.css",
+    "assets/*.less",
+    "index.d.ts"
+  ],
+  "main": "lib/index",
+  "module": "es/index",
+  "homepage": "https://github.com/pritesh3501/rc-time-picker-v2.git",
+  "author": "priteshpatel4540@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:react-component/time-picker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pritesh3501/rc-time-picker-v2.git/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "2.x",
+    "moment": "2.x",
+    "raf": "^3.4.1",
+    "rc-trigger": "^4.0.0-alpha.8"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.0",
+    "enzyme": "^3.8.0",
+    "enzyme-to-json": "^3.4.0",
+    "father": "^2.24.1",
+    "np": "^6.0.0",
+    "rc-util": "^5.1.0"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=development father doc dev --storybook",
+    "build": "father doc build --storybook",
+    "compile": "father build && lessc assets/index.less assets/index.css",
+    "gh-pages": "npm run build && father doc deploy",
+    "prepublishOnly": "npm run compile && np --yolo --no-publish",
+    "lint": "eslint src/ examples/ --ext .tsx,.ts,.jsx,.js",
+    "test": "father test",
+    "coverage": "father test --coverage",
+    "now-build": "npm run build"
+  }
+}
