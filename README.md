@@ -1,4 +1,4 @@
-# TimePicker
+# TimePicker V2
 
 React Time Picker Control.
 
