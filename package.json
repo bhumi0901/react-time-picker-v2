@@ -21,14 +21,14 @@
   ],
   "main": "lib/index",
   "module": "es/index",
-  "homepage": "https://github.com/pritesh3501/rc-time-picker-v2.git",
-  "author": "priteshpatel4540@gmail.com",
+  "homepage": "https://github.com/bhumi0901/react-time-picker-v2",
+  "author": "bhumika.sukhadiya@iblinfotech.com",
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/time-picker.git"
+    "url": "https://github.com/bhumi0901/react-time-picker-v2"
   },
   "bugs": {
-    "url": "https://github.com/pritesh3501/rc-time-picker-v2.git/issues"
+    "url": "https://github.com/bhumi0901/react-time-picker-v2/issues"
   },
   "license": "MIT",
   "dependencies": {
