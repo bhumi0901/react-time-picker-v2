@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import Trigger from "rc-trigger";
-import moment from "moment";
-import classNames from "classnames";
-import Panel from "./Panel";
-import placements from "./placements";
+import React, { Component } from 'react';
+import Trigger from 'rc-trigger';
+import moment from 'moment';
+import classNames from 'classnames';
+import Panel from './Panel';
+import placements from './placements';
 
 function noop() {}
 
@@ -13,14 +13,14 @@ function refFn(field, component) {
 
 class Picker extends Component {
   static defaultProps = {
-    clearText: "clear",
-    prefixCls: "rc-time-picker",
+    clearText: 'clear',
+    prefixCls: 'rc-time-picker',
     defaultOpen: false,
     inputReadOnly: false,
     style: {},
-    className: "",
-    inputClassName: "",
-    popupClassName: "",
+    className: '',
+    inputClassName: '',
+    popupClassName: '',
     popupStyle: {},
     align: {},
     defaultOpenValue: moment(),
@@ -32,7 +32,7 @@ class Picker extends Component {
     disabledMinutes: noop,
     disabledSeconds: noop,
     hideDisabledOptions: false,
-    placement: "bottomLeft",
+    placement: 'bottomLeft',
     onChange: noop,
     onAmPmChange: noop,
     onOpen: noop,
@@ -43,18 +43,14 @@ class Picker extends Component {
     use12Hours: false,
     focusOnOpen: false,
     onKeyDown: noop,
+    timezonAbbr: '',
   };
 
   constructor(props) {
     super(props);
-    this.saveInputRef = refFn.bind(this, "picker");
-    this.savePanelRef = refFn.bind(this, "panelInstance");
-    const {
-      defaultOpen,
-      defaultValue,
-      open = defaultOpen,
-      value = defaultValue,
-    } = props;
+    this.saveInputRef = refFn.bind(this, 'picker');
+    this.savePanelRef = refFn.bind(this, 'panelInstance');
+    const { defaultOpen, defaultValue, open = defaultOpen, value = defaultValue } = props;
     this.state = {
       open,
       value,
@@ -63,7 +59,7 @@ class Picker extends Component {
 
   static getDerivedStateFromProps(props, state) {
     const newState = {};
-    if ("value" in props) {
+    if ('value' in props) {
       newState.value = props.value;
     }
     if (props.open !== undefined) {
@@ -110,7 +106,7 @@ class Picker extends Component {
 
   setValue(value) {
     const { onChange } = this.props;
-    if (!("value" in this.props)) {
+    if (!('value' in this.props)) {
       this.setState({
         value,
       });
@@ -125,24 +121,16 @@ class Picker extends Component {
     }
 
     if (use12Hours) {
-      const fmtString = [
-        showHour ? "hh" : "",
-        showMinute ? "mm" : "",
-        showSecond ? "ss" : "",
-      ]
+      const fmtString = [showHour ? 'hh' : '', showMinute ? 'mm' : '', showSecond ? 'ss' : '']
         .filter((item) => !!item)
-        .join(":");
+        .join(':');
 
-      return fmtString.concat(" a");
+      return fmtString.concat(' a');
     }
 
-    return [
-      showHour ? "HH" : "",
-      showMinute ? "mm" : "",
-      showSecond ? "ss" : "",
-    ]
+    return [showHour ? 'HH' : '', showMinute ? 'mm' : '', showSecond ? 'ss' : '']
       .filter((item) => !!item)
-      .join(":");
+      .join(':');
   }
 
   getPanelElement() {
@@ -204,14 +192,7 @@ class Picker extends Component {
   }
 
   getPopupClassName() {
-    const {
-      showHour,
-      showMinute,
-      showSecond,
-      use12Hours,
-      prefixCls,
-      popupClassName,
-    } = this.props;
+    const { showHour, showMinute, showSecond, use12Hours, prefixCls, popupClassName } = this.props;
     let selectColumnCount = 0;
     if (showHour) {
       selectColumnCount += 1;
@@ -229,10 +210,9 @@ class Picker extends Component {
     return classNames(
       popupClassName,
       {
-        [`${prefixCls}-panel-narrow`]:
-          (!showHour || !showMinute || !showSecond) && !use12Hours,
+        [`${prefixCls}-panel-narrow`]: (!showHour || !showMinute || !showSecond) && !use12Hours,
       },
-      `${prefixCls}-panel-column-${selectColumnCount}`
+      `${prefixCls}-panel-column-${selectColumnCount}`,
     );
   }
 
@@ -240,7 +220,7 @@ class Picker extends Component {
     const { onOpen, onClose } = this.props;
     const { open: currentOpen } = this.state;
     if (currentOpen !== open) {
-      if (!("open" in this.props)) {
+      if (!('open' in this.props)) {
         this.setState({ open });
       }
       if (open) {
@@ -261,8 +241,7 @@ class Picker extends Component {
 
   renderClearButton() {
     const { value } = this.state;
-    const { prefixCls, allowEmpty, clearIcon, clearText, disabled } =
-      this.props;
+    const { prefixCls, allowEmpty, clearIcon, clearText, disabled } = this.props;
     if (!allowEmpty || !value || disabled) {
       return null;
     }
@@ -311,6 +290,7 @@ class Picker extends Component {
       inputReadOnly,
       inputIcon,
       popupStyle,
+      timezonAbbr,
     } = this.props;
     const { open, value } = this.state;
     const popupClassName = this.getPopupClassName();
@@ -323,7 +303,7 @@ class Picker extends Component {
         popupAlign={align}
         builtinPlacements={placements}
         popupPlacement={placement}
-        action={disabled ? [] : ["click"]}
+        action={disabled ? [] : ['click']}
         destroyPopupOnHide
         getPopupContainer={getPopupContainer}
         popupTransitionName={transitionName}
@@ -339,7 +319,9 @@ class Picker extends Component {
             name={name}
             onKeyDown={this.onKeyDown}
             disabled={disabled}
-            value={(value && value.format(this.getFormat())) || ""}
+            value={
+              (value && value.format(this.getFormat())) + (timezonAbbr ? timezonAbbr : '') || ''
+            }
             autoComplete={autoComplete}
             onFocus={onFocus}
             onBlur={onBlur}
